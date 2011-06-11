@@ -96,87 +96,87 @@
 					
 					// create video control elements
 					var controls = {
-		          wrapper: $(document.createElement('div'))
-		        , controlBar: $(document.createElement('div'))
-		    	  ,	playPause: $(document.createElement('button'))
-		    	  ,	mute: $(document.createElement('button'))
-		    	  ,	progressIn: $(document.createElement('div'))
-		    	  ,	progressOut: $(document.createElement('div'))
-		    	  ,	progressHandle: $(document.createElement('div'))
-		    	  , runTime: $(document.createElement('span'))
-		    	  ,	duration: $(document.createElement('span'))
-		    	  , loading: $(document.createElement('div'))
-		    	  , branding: $(document.createElement('a'))
-		    	  , buffered: $(document.createElement('div'))
-		    	  ,	video: video
-		    	};
-		    	
-		    	// set classes for styling
-		    	controls.wrapper.addClass(_settings.identity + 'controls');
-		      controls.controlBar.addClass(_settings.identity + 'control-bar');
-		    	controls.playPause.addClass(_settings.identity + 'play-pause');
-		    	controls.mute.addClass(_settings.identity + 'volume');
-		    	controls.progressOut.addClass(_settings.identity + 'progress-outer');
-		    	controls.progressIn.addClass(_settings.identity + 'progress-inner');
-		    	controls.progressHandle.addClass(_settings.identity + 'progress-handle');
-		    	controls.loading.addClass(_settings.identity + 'loading');
-		    	controls.runTime.addClass(_settings.identity + 'runtime');
-		    	controls.duration.addClass(_settings.identity + 'duration');
-		    	controls.branding.addClass(_settings.identity + 'branding');
-		    	controls.buffered.addClass(_settings.identity + 'buffered');
-		    	
-		    	// put the elements together
-		    	controls.wrapper
-		    		.append(controls.loading) //loading overlay
-		    		.append(controls.controlBar) //controls
-		    		.attr("bvjquery", "bvcontrols" + i);
-		    	controls.progressOut
-		    		.append(controls.buffered) //buffered data bar
-		    		.append(controls.progressIn) //progress indicator
-		    		.append(controls.progressHandle); //progress bar handle
-		    	controls.controlBar
-		    		.append(controls.playPause) // play button
-		    		.append(controls.progressOut) // progress wrapper
-		    		.append(controls.runTime) // current time
-		    		.append(controls.duration) // total time
-		    		.append(controls.mute) // volume button
-		    		.append(controls.branding); // custom brand icon
-		    	controls.wrapper.appendTo('body');
-		    	
-		    	// default display
-		    	controls.runTime.text('00:00');
-		    	controls.duration.text('/00:00');
-		    	
-		    	// event listeners for controls
-		    	controls.playPause.click(methods.playPause);
-		    	controls.mute.click(methods.mute);
-		    	controls.progressOut.click(methods.skipTo);
-		    	controls.progressHandle.mousedown(methods._setProgressSlider);
+						wrapper: $(document.createElement('div'))
+					,	controlBar: $(document.createElement('div'))
+					,	playPause: $(document.createElement('button'))
+					,	mute: $(document.createElement('button'))
+					,	progressIn: $(document.createElement('div'))
+					,	progressOut: $(document.createElement('div'))
+					,	progressHandle: $(document.createElement('div'))
+					,	runTime: $(document.createElement('span'))
+					,	duration: $(document.createElement('span'))
+					,	loading: $(document.createElement('div'))
+					,	branding: $(document.createElement('a'))
+					,	buffered: $(document.createElement('div'))
+					,	video: video
+					};
 
-		    	if (_settings.hidePlayer) {
-		    		controls.wrapper.hover(methods.showControls, methods.hideControls);
-		    	}
+					// set classes for styling
+					controls.wrapper.addClass(_settings.identity + 'controls');
+					controls.controlBar.addClass(_settings.identity + 'control-bar');
+					controls.playPause.addClass(_settings.identity + 'play-pause');
+					controls.mute.addClass(_settings.identity + 'volume');
+					controls.progressOut.addClass(_settings.identity + 'progress-outer');
+					controls.progressIn.addClass(_settings.identity + 'progress-inner');
+					controls.progressHandle.addClass(_settings.identity + 'progress-handle');
+					controls.loading.addClass(_settings.identity + 'loading');
+					controls.runTime.addClass(_settings.identity + 'runtime');
+					controls.duration.addClass(_settings.identity + 'duration');
+					controls.branding.addClass(_settings.identity + 'branding');
+					controls.buffered.addClass(_settings.identity + 'buffered');
 
-		    	// event listeners for video
-		    	video.addEventListener("seeking", _videoMethods.showLoading, false);
-		      video.addEventListener("seeked", _videoMethods.hideLoading, false);
-		      video.addEventListener("progress", _videoMethods.showBuffering, false);
-		      video.addEventListener("timeupdate", _videoMethods.showRunTime, false);
-		      video.addEventListener("ended", _videoMethods.ended, false);
-		      // event doesn't fire in chrome if already cached //------------------------------check this is true still
-		      if (video.readyState) _videMethods.setDurationTime(video);
+					// put the elements together
+					controls.wrapper
+						.append(controls.loading) //loading overlay
+						.append(controls.controlBar) //controls
+						.attr("bvjquery", "bvcontrols" + i);
+					controls.progressOut
+						.append(controls.buffered) //buffered data bar
+						.append(controls.progressIn) //progress indicator
+						.append(controls.progressHandle); //progress bar handle
+					controls.controlBar
+						.append(controls.playPause) // play button
+						.append(controls.progressOut) // progress wrapper
+						.append(controls.runTime) // current time
+						.append(controls.duration) // total time
+						.append(controls.mute) // volume button
+						.append(controls.branding); // custom brand icon
+					controls.wrapper.appendTo('body');
+
+					// default display
+					controls.runTime.text('00:00');
+					controls.duration.text('/00:00');
+
+					// event listeners for controls
+					controls.playPause.click(methods.playPause);
+					controls.mute.click(methods.mute);
+					controls.progressOut.click(methods.skipTo);
+					controls.progressHandle.mousedown(methods._setProgressSlider);
+
+					if (_settings.hidePlayer) {
+						controls.wrapper.hover(methods.showControls, methods.hideControls);
+					}
+
+					// event listeners for video
+					video.addEventListener("seeking", _videoMethods.showLoading, false);
+					video.addEventListener("seeked", _videoMethods.hideLoading, false);
+					video.addEventListener("progress", _videoMethods.showBuffering, false);
+					video.addEventListener("timeupdate", _videoMethods.showRunTime, false);
+					video.addEventListener("ended", _videoMethods.ended, false);
+					// event doesn't fire in chrome if already cached //------------------------------check this is true still
+					if (video.readyState) _videMethods.setDurationTime(video);
 					else video.addEventListener("loadedmetadata", _videoMethods.setDuration, false);
 
-		      $this.attr("bvjquery", "bvcontrols" + i); // -------------------------------------this needs to be changed to a uid
-		    	
-		    	controls.wrapper.data(_settings.identity + 'controls', controls);
-		    	methods.positionControls(controls.wrapper);
+					$this.attr("bvjquery", "bvcontrols" + i); // -------------------------------------this needs to be changed to a uid
+
+					controls.wrapper.data(_settings.identity + 'controls', controls);
+					methods.positionControls(controls.wrapper);
 					
 				});
 				
 			}
 			
-		, playPause: function (ev) {
+		,	playPause: function (ev) {
 				var $btn = $(this)
 					,	controls = methods._getVideoControls($btn);
 				if (controls && controls.video) {
@@ -190,11 +190,11 @@
 				}
 			}
 			
-		, stop: function () {
+		,	stop: function () {
 				
 			}
 			
-		, mute: function (ev) {
+		,	mute: function (ev) {
 				var controls = methods._getVideoControls($(this));
 				if (controls.video.muted) {
 					controls.video.muted = false;
@@ -206,7 +206,7 @@
 				}
 			}
 			
-		, skipTo: function (ev) {
+		,	skipTo: function (ev) {
 				var cr = this.getBoundingClientRect()
 					,	leftPos = Math.round(ev.clientX - cr.left) - 2
 					,	runTime = (leftPos / cr.width) * 100
@@ -218,7 +218,7 @@
 				}
 			}
 			
-		, positionControls: function ($v) {
+		,	positionControls: function ($v) {
 
 				var $this = $v || this;
 
@@ -243,7 +243,7 @@
 
 						// set the individual control positions and sizes
 						controls.progressOut.css('width',
-			        parseInt(controls.wrapper.css('width')) -
+							parseInt(controls.wrapper.css('width')) -
 							(
 								((controls.playPause.width() + 12) * 3) +
 									controls.runTime.width() + 12 +
@@ -257,7 +257,7 @@
 	
 			}
 
-		, showControls: function (ev) {
+		,	showControls: function (ev) {
 				var $wrapper = $(this)
 					,	controls = $wrapper.data(_settings.identity + "controls");
 				if (controls)
@@ -320,7 +320,7 @@
 
 		,	_getProgressPositions: function (obj, fromLeft) {
 				var cr = obj.parent().get(0).getBoundingClientRect()
-					,	leftPos = Math.round(fromLeft - cr.left) - (obj.width() / 2); //-----------------------------------need to get dimesions of handle instead of 2
+					,	leftPos = Math.round(fromLeft - cr.left) - (obj.width() / 2);
 				return {
 					cr: cr,
 					leftPos : leftPos
@@ -334,7 +334,7 @@
 		if (methods[method]) {
 			return methods[method].apply(
 					this
-				, Array.prototype.slice.call(arguments, 1)
+				,	Array.prototype.slice.call(arguments, 1)
 			);
 		} else if (!method || typeof method == "object") {
 			return methods.init.apply(this, arguments);
