@@ -1,7 +1,7 @@
 (function ($) {
 
 	var _videoMethods = {
-		
+
 			showLoading: function (obj) {
 				var controls = obj;
 				if (!controls.loading) { // manually passed in controls
@@ -171,11 +171,11 @@
 
 					controls.wrapper.data(_settings.identity + 'controls', controls);
 					methods.positionControls(controls.wrapper);
-					
+
 				});
-				
+
 			}
-			
+
 		,	playPause: function (ev) {
 				var $btn = $(this)
 					,	controls = methods._getVideoControls($btn);
@@ -189,11 +189,11 @@
 					}
 				}
 			}
-			
+
 		,	stop: function () {
 				
 			}
-			
+
 		,	mute: function (ev) {
 				var controls = methods._getVideoControls($(this));
 				if (controls.video.muted) {
@@ -205,7 +205,7 @@
 					controls.mute.addClass(_settings.identity + "muted");
 				}
 			}
-			
+
 		,	skipTo: function (ev) {
 				var cr = this.getBoundingClientRect()
 					,	leftPos = Math.round(ev.clientX - cr.left) - 2
@@ -217,7 +217,7 @@
 					controls.progressIn.css('width', leftPos + "px");
 				}
 			}
-			
+
 		,	positionControls: function ($v) {
 
 				var $this = $v || this;
@@ -229,7 +229,7 @@
 					if (controls) {
 
 						var $video = $(controls.video)
-							, vidOffs = $video.offset();
+							,	vidOffs = $video.offset();
 
 						// position the loading indicator over the video element
 						controls.loading.css('width', $video.width() + "px");
@@ -252,7 +252,7 @@
 								) + "px"
 							);
 					}
-  
+
 				});
 	
 			}
@@ -272,7 +272,7 @@
 				if (controls)
 					$wrapper.data(
 							_settings.indentity + "controls-timer"
-						, setTimeout(function () {
+						,	setTimeout(function () {
 								controls.controlBar.fadeOut(500);
 							}, 2000)
 					);
